@@ -1,0 +1,7 @@
+*.pyc
+*.pyo
+*.kpf
+*.tmp
+*.swp
+secret.txt
+db
