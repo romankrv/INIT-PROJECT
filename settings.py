@@ -53,7 +53,20 @@ MEDIA_URL = ''
 ADMIN_MEDIA_PREFIX = '/media/'
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = ''
+if not hasattr(globals(), 'SECRET_KEY'):
+    SECRET_FILE = os.path.join(PROJECT_ROOT, 'secret_key.txt')
+    try:
+        SECRET_KEY = open(SECRET_FILE).read().strip()
+    except IOError:
+        try:
+            import string, random
+            SECRET_KEY = ''.join(random.choice(string.printable) for i in xrange(50))
+            secret = file(SECRET_FILE, 'w')
+            secret.write(SECRET_KEY)
+            secret.close()
+        except IOError:
+            raise Exception('Please create a %s file with random characters to set your secret key' % SECRET_FILE)
+
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
