@@ -3,5 +3,5 @@
 *.kpf
 *.tmp
 *.swp
-secret_key
+secret_key.txt
 db
